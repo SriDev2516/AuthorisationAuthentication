@@ -24,7 +24,8 @@ namespace Identity.Pages.Account
                 {
                     new Claim(ClaimTypes.Name, Credential.UserName),
                     new Claim(ClaimTypes.Email,"admin@gmail.com"),
-                    new Claim("Department", "HR")
+                    new Claim("Department", "HR"),
+                    new Claim("EmploymentDate", "2022-8-1")
                 };
 
                 var idenity = new ClaimsIdentity(claims, "MyCookieAuth");

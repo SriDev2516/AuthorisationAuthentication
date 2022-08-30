@@ -1,3 +1,5 @@
+using Identity.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,9 +39,11 @@ namespace WebApp_UnderTheHood
                 });
                 options.AddPolicy("MustBelongToHR", policy =>
                 {
-                    policy.RequireClaim("Department", "HR");
+                    policy.RequireClaim("Department", "HR")
+                    .Requirements.Add(new HRManagerProbationRequirement(3));
                 });
             });
+            services.AddSingleton<IAuthorizationHandler, HRManagerProbationRequirementHandler>();
             services.AddRazorPages();
         }
 
